@@ -19,11 +19,42 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	//I always forget that this way of importing lombok requires the gradle-lombok plugin that I dread adding
+	//implementation("org.projectlombok:lombok:1.18.38")
+	//so here's the alternative (boy I'll return to this gradle.build file a lot; for this specific info)
+	//also for intelliJ (cus that has its own special treatment needs) go to
+	// File->Settings->Build, Execution & Deployment-> Compiler/Java Compiler -> Annotation Processor -> Enable (black magic I tell you)
+	//compileOnly 'org.projectlombok:lombok:1.18.38'
+	//annotationProcessor 'org.projectlombok:lombok:1.18.38'
+	//compileOnly("org.projectlombok:lombok:1.18.38")
+	//annotationProcessor("org.projectlombok:lombok:1.18.38")
+	//Make sure File->Settings->Java Compiler->Compiler is Javac (I also tried Kotlin-Groovy)
+	//Add lombok to classpath
+	//When it still doesn't work and the ide was restarted enough and gradle cleaned and rebuilt enough
+	//Just write all versions groovy style, kotlin style, and implementation command groovy style
+	//And then if it works start eliminating versions and clean-build-ing see which one was the right one
 	implementation("org.projectlombok:lombok:1.18.38")
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	//used for creating a nice styled homepage
+	implementation 'org.webjars:bootstrap:5.3.7'
+}
+
+//section added for tests
+test{
+	//for test logging
+	testLogging {
+		//this makes gradle show the status when running tests
+		events "passed", "skipped", "failed"
+		showExceptions true
+		exceptionFormat "full"
+		showCauses true
+		showStackTraces true
+		//if this is set to true, it allows the usage of System.out.println() statements in the tests
+		showStandardStreams = false
+	}
 }
 
 tasks.named('test') {
