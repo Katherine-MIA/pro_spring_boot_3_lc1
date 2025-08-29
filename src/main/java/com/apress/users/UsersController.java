@@ -33,7 +33,7 @@ public class UsersController {
 
     public UsersController() {
         this.users = new HashMap<>();
-        this.users.put("HardcodedUser@email.com",new User("HardcodedUser@email.com", "Hardcoded, User"));
+        this.users.put("HardcodedUser@email.com",new User("HardcodedUser@email.com", "Hardcoded User"));
         this.users.put("AnotherHardcodedUser@email.com",new User("AnotherHardcodedUser@email.com","Another Hardcoded User"));
     }
     //Says that this method should be executed for GET requests (without a body or  a path variable)
