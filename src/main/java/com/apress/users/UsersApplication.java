@@ -14,5 +14,4 @@ public class UsersApplication {
 		//the static method SpringApplication.run() is called.
 		SpringApplication.run(UsersApplication.class, args);
 	}
-
 }
