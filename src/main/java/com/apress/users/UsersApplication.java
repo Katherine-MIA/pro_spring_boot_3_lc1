@@ -15,3 +15,5 @@ public class UsersApplication {
 		SpringApplication.run(UsersApplication.class, args);
 	}
 }
+//Note to self: check books before you make git repo set-ups this repo edit was hell and led to nothing
+//so sad I will cry
