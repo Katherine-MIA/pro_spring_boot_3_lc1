@@ -19,7 +19,8 @@ repositories {
 }
 //Tomcat is used as a container by spring boot and it sets up an embedded server.
 //This default can be changed in the build file.
-ext['jakarta-servlet.version'] = '5.0.0'
+// We specify the jakarta-servlet version because jetty 11 does not support Servlet 6.0 (Book should mention this)
+//ext['jakarta-servlet.version'] = '5.0.0'
 
 dependencies {
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
@@ -41,14 +42,15 @@ dependencies {
     // Lombok
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     // Specify the module that will be replaced and the one that will replace it (Tomcat -> Jetty )
-    modules {
-        module("org.springframework.boot:spring-boot-starter-tomcat") {
-            replacedBy("org.springframework.boot:spring-boot-starter-jetty","Use Jetty instead of Tomcat")
-        }
-    }
+//    modules {
+//        module("org.springframework.boot:spring-boot-starter-tomcat") {
+//            replacedBy("org.springframework.boot:spring-boot-starter-jetty","Use Jetty instead of Tomcat")
+//        }
+//    }
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    // Jetty
-    implementation 'org.springframework.boot:spring-boot-starter-jetty'
+    // Jetty -> Makes tests fail an app :( So we should not follow the book on this example for a working app.
+    // So this is just an example for container change from Tomcat to Jetty
+    //implementation 'org.springframework.boot:spring-boot-starter-jetty'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	// WEB -> used for creating a nice styled homepage

@@ -16,7 +16,7 @@ import java.util.Map;
 // This means that this class is responsible for every incoming request
 //@RestController
 // This means that there will be a based /users endpoint for every request (the path of the endpoint)
-@RequestMapping("/users")
+//@RequestMapping("/users")
 public class InitialUsersController {
     /*
     private Map<String,User> users = new HashMap() {{
