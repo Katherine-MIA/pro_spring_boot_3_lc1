@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-//This means that this class is responsible for every incoming request
-@RestController
-//This means that there will be a based /users endpoint for every request (the path of the endpoint)
+// This means that this class is responsible for every incoming request
+//@RestController
+// This means that there will be a based /users endpoint for every request (the path of the endpoint)
 @RequestMapping("/users")
 public class InitialUsersController {
     /*
@@ -51,20 +51,20 @@ public class InitialUsersController {
                         .password("usrPa55wd!")
                         .build());
     }
-    //Says that this method should be executed for GET requests (without a body or  a path variable)
-    @GetMapping
+    // Says that this method should be executed for GET requests (without a body or  a path variable)
+    //@GetMapping
     public Collection<User> getAll(){
         return this.users.values();
     }
 
-    //Says this method will be executed for every GET request made with a path variable
-    @GetMapping("/{email}")
+    // Says this method will be executed for every GET request made with a path variable
+    //@GetMapping("/{email}")
     public User findUserByEmail(@PathVariable String email){
         return this.users.get(email);
     }
 
-    //This method will be executed for every POST request with a request body
-    @PostMapping
+    // This method will be executed for every POST request with a request body
+    //@PostMapping
     public User save(@RequestBody User user){
         this.users.put(user.getEmail(),user);
         //here book says to just return user but, I find that if I search for it in the map,
@@ -72,8 +72,8 @@ public class InitialUsersController {
         return this.users.get(user.getEmail());
     }
 
-    //This method will be executed for every DELETE request with a path variable
-    @DeleteMapping("/{email}")
+    // This method will be executed for every DELETE request with a path variable
+    //@DeleteMapping("/{email}")
     public void save(@PathVariable String email){
         this.users.remove(email);
     }

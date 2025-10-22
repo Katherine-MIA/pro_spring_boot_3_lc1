@@ -1,9 +1,7 @@
 package com.apress.users;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import java.util.Collection;
@@ -15,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 //this is of course an integration test class
 //Signals the class as spring boot test class and accepts parameters
 //one of them is webEnvironment which assigns a port to Tomcat when tests run (in our case a random port)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class UsersApplicationTests {
+// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class OldUsersApplicationTests {
     //this injects a value into the variable port
     //in this example it is the value of webEnvironment specified and set in the @SpringBootTest annotation
     //this is used to avoid port collision
@@ -30,13 +28,13 @@ class UsersApplicationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
+    //@Test
     public void indexPageShouldReturnHeaderOneContent() throws Exception {
         assertThat(this.restTemplate.getForObject(BASE_URL + port, String.class))
                 .contains("Simple Users Rest Application");
     }
 
-    @Test
+    //@Test
     public void usersEndPointShouldReturnCollectionWithTwoUsers() throws Exception {
         Collection<User> response = this.restTemplate.getForObject(BASE_URL + port + USERS_PATH, Collection.class);
         assertThat(response.size()).isEqualTo(2);
@@ -59,7 +57,7 @@ class UsersApplicationTests {
 //        assertThat(users.size()).isGreaterThanOrEqualTo(2);
 //    }
 
-    @Test
+    //@Test
     public void userDeleteEndpointShouldReturnVoid() throws Exception {
         assertThat(restTemplate.getForObject(BASE_URL + port + USERS_PATH, Collection.class).size()).isEqualTo(2);
         this.restTemplate.delete(BASE_URL + port + USERS_PATH, "AnotherHardcodedUser@email.com");
@@ -67,7 +65,7 @@ class UsersApplicationTests {
         assertThat(newUsers.size()).isLessThanOrEqualTo(2);
     }
 
-    @Test
+    //@Test
     public void findUserByEmailShouldReturnTheSearchedUser() throws Exception {
         final String EMAIL = "HardcodedUser@email.com";
         User user = this.restTemplate.getForObject(BASE_URL + port + USERS_PATH + "/" + EMAIL, User.class);
