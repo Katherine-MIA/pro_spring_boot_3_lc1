@@ -17,6 +17,9 @@ java {
 repositories {
 	mavenCentral()
 }
+//Tomcat is used as a container by spring boot and it sets up an embedded server.
+//This default can be changed in the build file.
+ext['jakarta-servlet.version'] = '5.0.0'
 
 dependencies {
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
@@ -35,10 +38,20 @@ dependencies {
 	//Just write all versions groovy style, kotlin style, and implementation command groovy style
 	//And then if it works start eliminating versions and clean-build-ing see which one was the right one
 	//implementation("org.projectlombok:lombok:1.18.38")
+    // Lombok
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Specify the module that will be replaced and the one that will replace it (Tomcat -> Jetty )
+    modules {
+        module("org.springframework.boot:spring-boot-starter-tomcat") {
+            replacedBy("org.springframework.boot:spring-boot-starter-jetty","Use Jetty instead of Tomcat")
+        }
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Jetty
+    implementation 'org.springframework.boot:spring-boot-starter-jetty'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	//used for creating a nice styled homepage
+	// WEB -> used for creating a nice styled homepage
 	implementation 'org.webjars:bootstrap:5.3.7'
 }
 
@@ -52,7 +65,7 @@ test{
 		exceptionFormat "full"
 		showCauses true
 		showStackTraces true
-		//if this is set to true, it allows the usage of System.out.println() statements in the tests
+		// if this is set to true, it allows the usage of System.out.println() statements in the tests
 		showStandardStreams = false
 	}
 }

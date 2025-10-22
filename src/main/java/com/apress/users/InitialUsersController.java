@@ -12,11 +12,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 //This means that this class is responsible for every incoming request
 @RestController
 //This means that there will be a based /users endpoint for every request (the path of the endpoint)
 @RequestMapping("/users")
-public class UsersController {
+public class InitialUsersController {
     /*
     private Map<String,User> users = new HashMap() {{
         put("HardcodedUser@email.com",new User("HardcodedUser@email.com","Hardcoded User"));
@@ -31,10 +32,24 @@ public class UsersController {
     //And that's why is bad to have hardcoded values for tests outside test areas
     private Map<String, User> users;
 
-    public UsersController() {
+    public InitialUsersController() {
         this.users = new HashMap<>();
-        this.users.put("HardcodedUser@email.com",new User("HardcodedUser@email.com", "Hardcoded User"));
-        this.users.put("AnotherHardcodedUser@email.com",new User("AnotherHardcodedUser@email.com","Another Hardcoded User"));
+        this.users.put("HardcodedUser@email.com", User.builder()
+                        .name("Hardcoded User")
+                        .email("HardcodedUser@email.com")
+                        .active(true)
+                        .role(UserRole.USER)
+                        .role(UserRole.INFO)
+                        .role(UserRole.ADMIN)
+                        .password("adm!nPa55")
+                        .build());
+        this.users.put("AnotherHardcodedUser@email.com",
+                User.builder()
+                        .name("Another Hardcoded User")
+                        .email("AnotherHardcodedUser@email.com")
+                        .role(UserRole.USER)
+                        .password("usrPa55wd!")
+                        .build());
     }
     //Says that this method should be executed for GET requests (without a body or  a path variable)
     @GetMapping
